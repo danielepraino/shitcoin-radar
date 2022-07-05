@@ -1,32 +1,66 @@
 import { Component } from '@angular/core';
+import { CoingeckoService } from './api/coingecko.service';
 
 @Component({
   selector: 'ac-root',
   template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center" class="content">
-      <h1>
-        Welcome to {{title}}!
-      </h1>
-      <span style="display: block">{{ title }} app is running!</span>
-      <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  <div class="flex justify-center items-center bg-slate-900 w-screen h-screen">
+    <div class="md:w-1/3 px-6">
+      <div class="mb-10">
+        <h1 class="text-white text-7xl text-center mb-8">Shitcoin Radar</h1>
+        <h2 class="text-white text-3xl text-center">Is that a shitcoin? 💩</h2>
+      </div>
+      <ac-searchbar (searchCoin)="searchCoin($event)"></ac-searchbar>
+      <div class="mb-8" *ngIf="coin.name != null">
+        <ac-coin [coin]="coin"></ac-coin>
+        <ac-coin-alert [isAshitcoin]="isAshitcoin"></ac-coin-alert>
+      </div>
+      <div class="text-xs text-slate-600 text-center absolute bottom-0 left-0 right-0 mb-4 mx-auto px-2">
+        <h5 class="text-sm">Disclaimer</h5>
+        <p>This page was constructed for the sole purpose of teaching, take this tool as is.
+           This is not a financial advice, before buying anything always do your own personal research (DYOR).
+           The developer is not responsible for any loss resulting from the use of the tool itself.
+        </p>
+      </div>
     </div>
-    <h2>Here are some links to help you start: </h2>
-    <ul>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-      </li>
-    </ul>
+  </div>
     <router-outlet></router-outlet>
   `,
   styles: []
 })
 export class AppComponent {
-  title = 'ng-shitcoinradar';
+
+  coin: any = {
+    name: null,
+    symbol: null,
+    image: null,
+  }
+
+  isAshitcoin: boolean = false;
+
+  constructor(private coingeckoService: CoingeckoService) { }
+
+  ngOnInit(): void {
+  }
+
+  searchCoin(searchedCoin: any) {
+    this.coingeckoService.getSearch(searchedCoin).subscribe(res => {
+      if (res) {
+        this.coingeckoService.getCoins(res.coins[0].id).subscribe(res => {
+          if (res) {
+            this.coinCheck(res);
+          }
+        });
+      }
+    });
+  }
+
+  coinCheck(res: any) {
+    if (res.coingecko_score < 35) {
+      this.isAshitcoin = true;
+    } else {
+      this.isAshitcoin = false;
+    }
+    this.coin = res;
+  }
 }
