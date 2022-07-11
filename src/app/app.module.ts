@@ -9,18 +9,30 @@ import { SearchbarComponent } from './components/searchbar.component';
 import { CoinComponent } from './components/coin.component';
 import { CoinAlertComponent } from './components/coin-alert.component';
 
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+import { DarkModeComponent } from './components/dark-mode.component';
+import { RadarLogoComponent } from './components/radar-logo.component';
+
+export function playerFactory(): any {
+  return import('lottie-web');
+}
+
 @NgModule({
   declarations: [
     AppComponent,
     SearchbarComponent,
     CoinComponent,
-    CoinAlertComponent
+    CoinAlertComponent,
+    DarkModeComponent,
+    RadarLogoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    LottieModule.forRoot({ player: playerFactory }),
   ],
   providers: [],
   bootstrap: [AppComponent]
