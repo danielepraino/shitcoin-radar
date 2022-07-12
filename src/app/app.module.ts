@@ -13,6 +13,8 @@ import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { DarkModeComponent } from './components/dark-mode.component';
 import { RadarLogoComponent } from './components/radar-logo.component';
+import { AlertAnimComponent } from './components/alert-anim.component';
+import { CheckAnimComponent } from './components/check-anim.component';
 
 export function playerFactory(): any {
   return import('lottie-web');
@@ -25,7 +27,9 @@ export function playerFactory(): any {
     CoinComponent,
     CoinAlertComponent,
     DarkModeComponent,
-    RadarLogoComponent
+    RadarLogoComponent,
+    AlertAnimComponent,
+    CheckAnimComponent,
   ],
   imports: [
     BrowserModule,

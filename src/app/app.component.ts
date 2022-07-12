@@ -27,10 +27,10 @@ import { CoingeckoService } from './api/coingecko.service';
               Is that a shitcoin? 💩
             </h2>
           </div>
-          <ac-searchbar (searchCoin)="searchCoin($event)"></ac-searchbar>
+          <ac-searchbar *ngIf="coin.name == null" (searchCoin)="searchCoin($event)" [coinNotFound]="coinNotFound"></ac-searchbar>
           <div class="mb-8" *ngIf="coin.name != null">
             <ac-coin [coin]="coin"></ac-coin>
-            <ac-coin-alert [isAshitcoin]="isAshitcoin"></ac-coin-alert>
+            <ac-coin-alert [itsAshitcoin]="itsAshitcoin"></ac-coin-alert>
           </div>
           <div
             class="text-xs text-slate-600 text-center absolute bottom-0 left-0 right-0 mb-4 mx-auto px-2"
@@ -58,8 +58,9 @@ export class AppComponent {
     image: null,
   };
 
-  isAshitcoin: boolean = false;
+  itsAshitcoin: boolean = false;
   isDarkMode: boolean = true;
+  coinNotFound: boolean | null = null;
 
   constructor(private coingeckoService: CoingeckoService) {}
 
@@ -67,21 +68,25 @@ export class AppComponent {
 
   searchCoin(searchedCoin: any) {
     this.coingeckoService.getSearch(searchedCoin).subscribe((res) => {
-      if (res) {
+      if (res.coins.length > 0) {
         this.coingeckoService.getCoins(res.coins[0].id).subscribe((res) => {
           if (res) {
             this.coinCheck(res);
           }
         });
+      } else {
+        this.coinNotFound = true;
       }
+    }, (error) => {
+      console.log("ERROR: ", error);
     });
   }
 
   coinCheck(res: any) {
     if (res.coingecko_score < 35) {
-      this.isAshitcoin = true;
+      this.itsAshitcoin = true;
     } else {
-      this.isAshitcoin = false;
+      this.itsAshitcoin = false;
     }
     this.coin = res;
   }

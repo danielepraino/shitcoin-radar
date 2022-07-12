@@ -3,9 +3,9 @@ import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
-  selector: 'ac-radar-logo',
+  selector: 'ac-check-anim',
   template: `
-    <ng-lottie
+     <ng-lottie
       [options]="options"
       (animationCreated)="onAnimate($event)">
     </ng-lottie>
@@ -13,10 +13,11 @@ import { AnimationOptions } from 'ngx-lottie';
   styles: [
   ]
 })
-export class RadarLogoComponent implements OnInit {
+export class CheckAnimComponent implements OnInit {
 
   options: AnimationOptions = {
-    path: '/assets/lottie/netsurf-radar-scan.json'
+    path: '/assets/lottie/checkmark-animation.json',
+    loop: false,
   };
 
   constructor() { }
@@ -27,4 +28,5 @@ export class RadarLogoComponent implements OnInit {
   onAnimate(animationItem: AnimationItem): void {
     console.log(animationItem);
   }
+
 }
