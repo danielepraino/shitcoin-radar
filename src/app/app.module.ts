@@ -11,10 +11,13 @@ import { CoinAlertComponent } from './components/coin-alert.component';
 
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
-import { DarkModeComponent } from './components/dark-mode.component';
-import { RadarLogoComponent } from './components/radar-logo.component';
-import { AlertAnimComponent } from './components/alert-anim.component';
-import { CheckAnimComponent } from './components/check-anim.component';
+import { DarkModeAnimComponent } from './components/animations/dark-mode-anim.component';
+import { RadarLogoAnimComponent } from './components/animations/radar-logo-anim.component';
+import { AlertAnimComponent } from './components/animations/alert-anim.component';
+import { CheckAnimComponent } from './components/animations/check-anim.component';
+import { LoadingAnimComponent } from './components/animations/loading-anim.component';
+import { DisclaimerComponent } from './components/disclaimer.component';
+import { CoinResultComponent } from './components/coin-result.component';
 
 export function playerFactory(): any {
   return import('lottie-web');
@@ -26,10 +29,13 @@ export function playerFactory(): any {
     SearchbarComponent,
     CoinComponent,
     CoinAlertComponent,
-    DarkModeComponent,
-    RadarLogoComponent,
+    DarkModeAnimComponent,
+    RadarLogoAnimComponent,
     AlertAnimComponent,
     CheckAnimComponent,
+    LoadingAnimComponent,
+    DisclaimerComponent,
+    CoinResultComponent,
   ],
   imports: [
     BrowserModule,

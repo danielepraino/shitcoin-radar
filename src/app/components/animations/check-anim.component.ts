@@ -3,9 +3,9 @@ import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
-  selector: 'ac-alert-anim',
+  selector: 'ac-check-anim',
   template: `
-     <ng-lottie
+    <ng-lottie
       [options]="options"
       (animationCreated)="onAnimate($event)">
     </ng-lottie>
@@ -13,10 +13,11 @@ import { AnimationOptions } from 'ngx-lottie';
   styles: [
   ]
 })
-export class AlertAnimComponent implements OnInit {
+export class CheckAnimComponent implements OnInit {
 
   options: AnimationOptions = {
-    path: '/assets/lottie/alert-notification-character.json',
+    path: '/assets/lottie/checkmark-animation.json',
+    loop: false,
   };
 
   constructor() { }

@@ -7,10 +7,10 @@ import { CoingeckoService } from './api/coingecko.service';
   template: `
     <div [ngClass]="{ dark: isDarkMode }">
       <div class="flex justify-center items-center dark:bg-slate-900 w-screen h-screen relative">
-        <ac-dark-mode
+        <ac-dark-mode-anim
           class="absolute top-0 right-0 w-20"
           (setDarkMode)="setDarkMode($event)"
-        ></ac-dark-mode>
+        ></ac-dark-mode-anim>
         <div class="md:w-1/3 px-6">
           <div class="mb-10">
             <div class="flex flex-col-reverse md:flex-row justify-center items-center">
@@ -20,30 +20,23 @@ import { CoingeckoService } from './api/coingecko.service';
                 </h1>
               </div>
               <div class="w-24">
-                <ac-radar-logo></ac-radar-logo>
+                <ac-radar-logo-anim></ac-radar-logo-anim>
               </div>
             </div>
             <h2 class="text-black dark:text-white text-3xl text-center">
               Is that a shitcoin? 💩
             </h2>
           </div>
-          <ac-searchbar *ngIf="coin.name == null" (searchCoin)="searchCoin($event)" [coinNotFound]="coinNotFound"></ac-searchbar>
+          <ac-searchbar *ngIf="coin.name == null && !isLoading" (searchCoin)="searchCoin($event)" [coinNotFound]="coinNotFound"></ac-searchbar>
+          <div *ngIf="isLoading" class="w-28 mx-auto rounded-xl">
+            <ac-loading-anim></ac-loading-anim>
+          </div>
           <div class="mb-8" *ngIf="coin.name != null">
-            <ac-coin [coin]="coin"></ac-coin>
-            <ac-coin-alert [itsAshitcoin]="itsAshitcoin"></ac-coin-alert>
+            <ng-container *ngIf="!isLoading">
+              <ac-coin-result [coin]="coin" [itsAshitcoin]="itsAshitcoin"></ac-coin-result>
+            </ng-container>
           </div>
-          <div
-            class="text-xs text-slate-600 text-center absolute bottom-0 left-0 right-0 mb-4 mx-auto px-2"
-          >
-            <h5 class="text-sm">Disclaimer</h5>
-            <p>
-              This page was constructed for the sole purpose of teaching, take
-              this tool as is. This is not a financial advice, before buying
-              anything always do your own personal research (DYOR). The
-              developer is not responsible for any loss resulting from the use
-              of the tool itself.
-            </p>
-          </div>
+          <ac-disclaimer></ac-disclaimer>
         </div>
       </div>
     </div>
@@ -60,6 +53,7 @@ export class AppComponent {
 
   itsAshitcoin: boolean = false;
   isDarkMode: boolean = true;
+  isLoading: boolean | null = null;
   coinNotFound: boolean | null = null;
 
   constructor(private coingeckoService: CoingeckoService) {}
@@ -67,11 +61,17 @@ export class AppComponent {
   ngOnInit(): void {}
 
   searchCoin(searchedCoin: any) {
+    this.isLoading = true;
+    console.log("this.isLoading", this.isLoading);
     this.coingeckoService.getSearch(searchedCoin).subscribe((res) => {
       if (res.coins.length > 0) {
         this.coingeckoService.getCoins(res.coins[0].id).subscribe((res) => {
           if (res) {
-            this.coinCheck(res);
+            setTimeout(() => {
+              this.isLoading = false;
+              console.log("this.isLoading", this.isLoading);
+              this.coinCheck(res);
+            }, 1000)
           }
         });
       } else {

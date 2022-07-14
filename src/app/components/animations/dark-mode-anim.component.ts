@@ -3,7 +3,7 @@ import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
-  selector: 'ac-dark-mode',
+  selector: 'ac-dark-mode-anim',
   template: `
     <ng-lottie
       [options]="options"
@@ -14,7 +14,7 @@ import { AnimationOptions } from 'ngx-lottie';
   styles: [
   ]
 })
-export class DarkModeComponent implements OnInit {
+export class DarkModeAnimComponent implements OnInit {
 
   anim: any;
   direction: number = -1;

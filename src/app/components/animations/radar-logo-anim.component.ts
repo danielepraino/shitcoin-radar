@@ -3,7 +3,7 @@ import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
-  selector: 'ac-radar-logo',
+  selector: 'ac-radar-logo-anim',
   template: `
     <ng-lottie
       [options]="options"
@@ -13,7 +13,7 @@ import { AnimationOptions } from 'ngx-lottie';
   styles: [
   ]
 })
-export class RadarLogoComponent implements OnInit {
+export class RadarLogoAnimComponent implements OnInit {
 
   options: AnimationOptions = {
     path: '/assets/lottie/netsurf-radar-scan.json'
