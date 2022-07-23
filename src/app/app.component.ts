@@ -9,7 +9,7 @@ import { CoingeckoService } from './api/coingecko.service';
       <div class="flex justify-center items-center dark:bg-slate-900 w-screen h-screen relative">
         <ac-dark-mode-anim
           class="absolute top-0 right-0 w-20"
-          (setDarkMode)="setDarkMode($event)"
+          (setDarkMode)="setDarkMode()"
         ></ac-dark-mode-anim>
         <div class="md:w-1/3 px-6">
           <div class="mb-10">
@@ -52,13 +52,15 @@ export class AppComponent {
   };
 
   itsAshitcoin: boolean = false;
-  isDarkMode: boolean = true;
+  isDarkMode: boolean | null = null;
   isLoading: boolean | null = null;
   coinNotFound: boolean | null = null;
 
   constructor(private coingeckoService: CoingeckoService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    localStorage['theme'] === 'dark' ? this.isDarkMode = true : this.isDarkMode = false;
+  }
 
   searchCoin(searchedCoin: any) {
     this.isLoading = true;
@@ -91,8 +93,9 @@ export class AppComponent {
     this.coin = res;
   }
 
-  setDarkMode(event: any) {
+  setDarkMode() {
     this.isDarkMode = !this.isDarkMode;
+    this.isDarkMode ? window.localStorage.setItem('theme', 'dark') : window.localStorage.setItem('theme', 'light');
     console.log('this.isDarkMode', this.isDarkMode);
   }
 }

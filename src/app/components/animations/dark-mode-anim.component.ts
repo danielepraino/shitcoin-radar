@@ -17,7 +17,9 @@ import { AnimationOptions } from 'ngx-lottie';
 export class DarkModeAnimComponent implements OnInit {
 
   anim: any;
-  direction: number = -1;
+  direction: number | null = null;
+  startFrame: number = 0;
+  endFrame: number = 134;
 
   options: AnimationOptions = {
     path: '/assets/lottie/light-dark-mode-button.json',
@@ -28,10 +30,12 @@ export class DarkModeAnimComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    localStorage['theme'] === 'dark' ? this.direction = -1 : this.direction = 1;
   }
 
   onAnimate(animationItem: AnimationItem): void {
     this.anim = animationItem;
+    localStorage['theme'] === 'dark' ? this.anim.currentRawFrame = this.startFrame : this.anim.currentRawFrame = this.endFrame;
   }
 
   updateAnimation(): void {

@@ -11,7 +11,7 @@ import { Component, OnInit, Input } from '@angular/core';
         <p class="font-bold text-center rounded-b w-full py-2" [ngClass]="{'bg-green-600': !itsAshitcoin}">It's safe (always DYOR)</p>
       </div>
       <div *ngIf="itsAshitcoin" class="flex justify-center items-center flex-col">
-        <div class="w-24">
+        <div class="w-16 py-4">
           <ac-alert-anim></ac-alert-anim>
         </div>
         <p class="font-bold text-center rounded w-full py-2" [ngClass]="{'bg-red-600': itsAshitcoin}">Sorry, this is a shitcoin!</p>

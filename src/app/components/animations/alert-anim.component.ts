@@ -16,7 +16,7 @@ import { AnimationOptions } from 'ngx-lottie';
 export class AlertAnimComponent implements OnInit {
 
   options: AnimationOptions = {
-    path: '/assets/lottie/alert-notification-character.json',
+    path: '/assets/lottie/alert.json',
   };
 
   constructor() { }
