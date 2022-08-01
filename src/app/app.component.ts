@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { CoingeckoService } from './api/coingecko.service';
-
 @Component({
   selector: 'ac-root',
   template: `
@@ -12,30 +10,8 @@ import { CoingeckoService } from './api/coingecko.service';
           (setDarkMode)="setDarkMode()"
         ></ac-dark-mode-anim>
         <div class="md:w-1/3 px-6">
-          <div class="mb-10">
-            <div class="flex flex-col-reverse md:flex-row justify-center items-center">
-              <div class="w-full">
-                <h1 class="text-black dark:text-white text-5xl md:text-7xl text-center mb-8">
-                  Shitcoin Radar
-                </h1>
-              </div>
-              <div class="w-24">
-                <ac-radar-logo-anim></ac-radar-logo-anim>
-              </div>
-            </div>
-            <h2 class="text-black dark:text-white text-3xl text-center">
-              Is that a shitcoin? 💩
-            </h2>
-          </div>
-          <ac-searchbar *ngIf="coin.name == null && !isLoading" (searchCoin)="searchCoin($event)" [coinNotFound]="coinNotFound"></ac-searchbar>
-          <div *ngIf="isLoading" class="w-28 mx-auto rounded-xl">
-            <ac-loading-anim></ac-loading-anim>
-          </div>
-          <div class="mb-8" *ngIf="coin.name != null">
-            <ng-container *ngIf="!isLoading">
-              <ac-coin-result [coin]="coin" [itsAshitcoin]="itsAshitcoin"></ac-coin-result>
-            </ng-container>
-          </div>
+          <ac-main *ngIf="!isExplanation" (showExplanation)="showExplanation($event)"></ac-main>
+          <ac-explanation *ngIf="isExplanation" (showExplanation)="showExplanation($event)"></ac-explanation>
           <ac-disclaimer></ac-disclaimer>
         </div>
       </div>
@@ -45,57 +21,24 @@ import { CoingeckoService } from './api/coingecko.service';
   styles: [],
 })
 export class AppComponent {
-  coin: any = {
-    name: null,
-    symbol: null,
-    image: null,
-  };
 
-  itsAshitcoin: boolean = false;
   isDarkMode: boolean | null = null;
-  isLoading: boolean | null = null;
-  coinNotFound: boolean | null = null;
+  isExplanation: boolean = false;
 
-  constructor(private coingeckoService: CoingeckoService) {}
+  constructor() {}
 
   ngOnInit(): void {
     localStorage['theme'] === 'dark' ? this.isDarkMode = true : this.isDarkMode = false;
-  }
-
-  searchCoin(searchedCoin: any) {
-    this.isLoading = true;
-    console.log("this.isLoading", this.isLoading);
-    this.coingeckoService.getSearch(searchedCoin).subscribe((res) => {
-      if (res.coins.length > 0) {
-        this.coingeckoService.getCoins(res.coins[0].id).subscribe((res) => {
-          if (res) {
-            setTimeout(() => {
-              this.isLoading = false;
-              console.log("this.isLoading", this.isLoading);
-              this.coinCheck(res);
-            }, 1000)
-          }
-        });
-      } else {
-        this.coinNotFound = true;
-      }
-    }, (error) => {
-      console.log("ERROR: ", error);
-    });
-  }
-
-  coinCheck(res: any) {
-    if (res.coingecko_score < 35) {
-      this.itsAshitcoin = true;
-    } else {
-      this.itsAshitcoin = false;
-    }
-    this.coin = res;
   }
 
   setDarkMode() {
     this.isDarkMode = !this.isDarkMode;
     this.isDarkMode ? window.localStorage.setItem('theme', 'dark') : window.localStorage.setItem('theme', 'light');
     console.log('this.isDarkMode', this.isDarkMode);
+  }
+
+  showExplanation(event: any){
+    this.isExplanation = !this.isExplanation;
+    console.log("this.isExplanation", this.isExplanation);
   }
 }
