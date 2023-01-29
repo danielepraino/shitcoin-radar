@@ -6,6 +6,7 @@ import { AnimationOptions } from 'ngx-lottie';
   selector: 'ac-dark-mode-anim',
   template: `
     <ng-lottie
+      class="cursor-pointer"
       [options]="options"
       (animationCreated)="onAnimate($event)"
       (click)="updateAnimation(); setDarkMode.emit(false)">

@@ -46,11 +46,11 @@ import { NgForm } from '@angular/forms';
           type="text"
           name="searchbar"
           id="searchbar"
-          placeholder="e.g. SafeMoon or SFM"
+          placeholder="e.g. Shiba Inu or SHIB"
           #searchbarRef="ngModel"
           ngModel
           required
-          pattern="^[a-zA-Z0-9]*$"
+          pattern="^[a-zA-Z0-9 ]*$"
           maxlength="25"
         />
         <svg
@@ -71,7 +71,7 @@ import { NgForm } from '@angular/forms';
         </svg>
       </div>
       <button
-        class="text-white font-bold bg-blue-600 hover:bg-blue-700 py-2 px-2 rounded md:ml-4 w-full md:w-52 disabled:opacity-50"
+        class="text-white font-bold bg-blue-600 hover:bg-blue-700 py-2 px-2 rounded md:ml-4 w-full md:w-52 disabled:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
         [disabled]="!f.valid"
         (click)="searchCoin.emit(searchbarRef.value)"
       >
@@ -81,6 +81,7 @@ import { NgForm } from '@angular/forms';
   `,
   styles: [],
 })
+
 export class SearchbarComponent implements OnInit {
   constructor() {}
 
