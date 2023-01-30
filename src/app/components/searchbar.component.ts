@@ -5,27 +5,12 @@ import { NgForm } from '@angular/forms';
   selector: 'ac-searchbar',
   template: `
     <form
-      class="flex justify-center items-center flex-wrap md:flex-nowrap w-full"
+      class="flex justify-center items-center flex-wrap xs:flex-nowrap w-full"
       #f="ngForm"
     >
-      <div
-        *ngIf="f.dirty && searchbarRef.errors?.['required']"
-        class="text-xs text-red-500"
-      >
-        write a coin you want to search for
-      </div>
-      <div
-        *ngIf="f.dirty && searchbarRef.errors?.['pattern']"
-        class="text-xs text-red-500"
-      >
-        no symbols allowed!
-      </div>
-      <div
-        *ngIf="coinNotFound"
-        class="text-xs text-red-500"
-      >
-        sorry, coin not found!
-      </div>
+      <ac-error class="w-full" *ngIf="f.dirty && searchbarRef.hasError('required')" errorMsg="Write a coin you want to search for"></ac-error>
+      <ac-error class="w-full" *ngIf="f.dirty && searchbarRef.hasError('pattern')" errorMsg="No symbols allowed!"></ac-error>
+      <ac-error class="w-full" *ngIf="coinNotFound" errorMsg="Sorry, coin not found! Scan another coin"></ac-error>
       <div class="relative w-full">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +27,7 @@ import { NgForm } from '@angular/forms';
           />
         </svg>
         <input
-          class="text-center border-2 border-slate-900 w-full rounded h-10 mb-4 md:mb-0 p-2 px-12"
+          class="text-center border-2 border-slate-900 w-full rounded h-10 mb-4 p-2 px-12"
           type="text"
           name="searchbar"
           id="searchbar"
@@ -61,7 +46,7 @@ import { NgForm } from '@angular/forms';
           viewBox="0 0 24 24"
           stroke="currentColor"
           stroke-width="2"
-          (click)="searchbarRef.reset(); coinNotFound = false"
+          (click)="searchbarRef.reset(); resetScan.emit()"
         >
           <path
             stroke-linecap="round"
@@ -71,9 +56,9 @@ import { NgForm } from '@angular/forms';
         </svg>
       </div>
       <button
-        class="text-white font-bold bg-blue-600 hover:bg-blue-700 py-2 px-2 rounded md:ml-4 w-full md:w-52 disabled:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+        class="text-white font-bold bg-blue-600 hover:bg-blue-700 py-2 px-2 rounded w-full disabled:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
         [disabled]="!f.valid"
-        (click)="searchCoin.emit(searchbarRef.value)"
+        (click)="searchCoin.emit(searchbarRef.value); searchbarRef.reset()"
       >
         Let's find out! 🙏
       </button>
@@ -90,5 +75,6 @@ export class SearchbarComponent implements OnInit {
   }
 
   @Output() searchCoin = new EventEmitter<NgForm>();
+  @Output() resetScan = new EventEmitter<any>();
   @Input() coinNotFound: boolean | null = null;
 }

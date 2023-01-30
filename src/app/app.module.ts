@@ -15,6 +15,7 @@ import { MainComponent } from './views/main.component';
 import { ExplanationComponent } from './views/explanation.component';
 import { TitleComponent } from './components/title.component';
 import { GenericAnimComponent } from './components/animations/generic-anim.component';
+import { ErrorComponent } from './components/error.component';
 
 export function playerFactory(): any {
   return import('lottie-web');
@@ -33,6 +34,7 @@ export function playerFactory(): any {
     ExplanationComponent,
     TitleComponent,
     GenericAnimComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
