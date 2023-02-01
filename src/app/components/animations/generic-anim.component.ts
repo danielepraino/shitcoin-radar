@@ -9,16 +9,12 @@ import { AnimationOptions } from 'ngx-lottie';
     >
   </ng-lottie>
 `,
-  styles: [
-  ]
+  styles: []
 })
 export class GenericAnimComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   @Input() options: AnimationOptions = {};
-
 }

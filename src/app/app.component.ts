@@ -19,10 +19,10 @@ import { Component } from '@angular/core';
     </div>
     <router-outlet></router-outlet>
   `,
-  styles: [],
+  styles: []
 })
-export class AppComponent {
 
+export class AppComponent {
   isDarkMode: boolean | null = null;
   isExplanation: boolean = false;
 

@@ -9,16 +9,13 @@ import { Component, Input, OnInit } from '@angular/core';
       <p class="font-light text-slate-500 dark:text-slate-200">{{coin.symbol.toUpperCase()}}</p>
     </div>
   `,
-  styles: [
-  ]
+  styles: []
 })
-export class CoinComponent implements OnInit {
 
+export class CoinComponent implements OnInit {
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   @Input() coin: any = {};
-
 }

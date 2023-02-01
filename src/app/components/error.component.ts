@@ -1,21 +1,23 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'ac-error',
   template: `
-    <div *ngIf="isVisible" class="font-semibold text-xs text-red-400 bg-red-100 dark:bg-red-800 rounded p-1 mb-1">
+    <div [@errorToast]="showError ? 'open' : 'closed'" class="font-semibold text-xs text-red-100 bg-red-600 rounded p-1 mb-1">
       <div>
         <div class="text-center">
           {{ errorMsg }}
         </div>
-        <div class="h-4 w-4 text-red-400 cursor-pointer relative float-right bottom-4">
+        <div class="h-4 w-4 text-red-100 cursor-pointer relative float-right bottom-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
             stroke-width="2"
-            (click)="this.isVisible = false"
+            (click)="showError = false; formRef?.resetForm()"
           >
             <path
               stroke-linecap="round"
@@ -27,23 +29,31 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
       </div>
     </div>
   `,
-  styles: [
+  styles: [],
+  animations: [    
+    trigger('errorToast', [   
+      state('open', style({ opacity: 1, transform: 'translateY(0%)' })), 
+      state('closed', style({ opacity: 0, transform: 'translateY(-100%)' })),             
+      transition('open <=> closed', [          
+        animate('500ms ease-in-out')
+      ]),  
+    ])  
   ]
 })
-export class ErrorComponent implements OnInit {
-  isVisible: boolean | null = null;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+export class ErrorComponent implements OnInit {
+  showError: boolean = true;
+
+  constructor() {}
 
   ngOnInit(): void {
-    this.isVisible = true;
-
-    // setTimeout(() => {
-    //   this.isVisible = false;
-    //   this.cdr.detectChanges();
-    // }, 3000);
+    setTimeout(() => {
+      this.showError = false;
+      this.formRef?.resetForm();
+    }, 2500);
   }
 
   @Input() errorMsg: string | null = null;
+  @Input() formRef: NgForm | undefined;
 }
 

@@ -12,11 +12,10 @@ import { AnimationOptions } from 'ngx-lottie';
       (click)="updateAnimation(); setDarkMode.emit(false)">
     </ng-lottie>
   `,
-  styles: [
-  ]
+  styles: []
 })
-export class DarkModeAnimComponent implements OnInit {
 
+export class DarkModeAnimComponent implements OnInit {
   anim: any;
   direction: number | null = null;
   startFrame: number = 0;
@@ -28,7 +27,7 @@ export class DarkModeAnimComponent implements OnInit {
     loop: false,
   };
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     localStorage['theme'] === 'dark' ? this.direction = -1 : this.direction = 1;
@@ -47,5 +46,4 @@ export class DarkModeAnimComponent implements OnInit {
   }
 
   @Output() setDarkMode = new EventEmitter<any>();
-
 }

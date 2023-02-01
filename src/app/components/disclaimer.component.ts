@@ -13,8 +13,9 @@ import { Component, OnInit } from '@angular/core';
       </p>
     </div>
   `,
-  styles: [],
+  styles: []
 })
+
 export class DisclaimerComponent implements OnInit {;
   constructor() {}
 

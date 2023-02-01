@@ -6,8 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
     <ac-coin [coin]="coin"></ac-coin>
     <ac-coin-alert [itsAshitcoin]="itsAshitcoin"></ac-coin-alert>
   `,
-  styles: [],
+  styles: []
 })
+
 export class CoinResultComponent implements OnInit {
   constructor() {}
 

@@ -18,16 +18,13 @@ import { Component, OnInit, Input } from '@angular/core';
       </div>
     </div>
   `,
-  styles: [
-  ]
+  styles: []
 })
+
 export class CoinAlertComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   @Input() itsAshitcoin: boolean = false;
-
 }

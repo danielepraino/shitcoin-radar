@@ -8,7 +8,6 @@ import { environment } from '../../../environments/environment';
 })
 
 export class CoingeckoService {
-
   constructor(private http: HttpClient) {}
 
   getSearch(coin: any): Observable<any> {

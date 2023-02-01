@@ -39,8 +39,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
       </button>
     </div>
   `,
-  styles: [],
+  styles: []
 })
+
 export class ExplanationComponent implements OnInit {
   coin: any = {
     name: null,

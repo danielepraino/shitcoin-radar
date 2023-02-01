@@ -7,7 +7,9 @@ import { map, tap } from 'rxjs';
   selector: 'ac-main',
   template: `
     <ac-title (showExplanation)="showExplanation.emit($event)"></ac-title>
-    <ac-searchbar *ngIf="coin?.id == null && !isLoading" (searchCoin)="searchCoin($event)" [coinNotFound]="coinNotFound" (resetScan)="resetScan()"></ac-searchbar>
+    <div class="h-full">
+      <ac-searchbar *ngIf="coin?.id == null && !isLoading" (searchCoin)="searchCoin($event)" [coinNotFound]="coinNotFound" (resetScan)="resetScan()"></ac-searchbar>
+    </div>
     <div class="mb-8" *ngIf="coin?.id != null && !isLoading">
       <ac-coin-result  [coin]="coin" [itsAshitcoin]="itsAshitcoin"></ac-coin-result>
       <button class="text-white font-bold bg-blue-600 hover:bg-blue-700 rounded w-full mt-4 mb-8 py-2 px-2" (click)="resetScan()">Scan another coin 🔍</button>
@@ -16,20 +18,18 @@ import { map, tap } from 'rxjs';
       <ac-generic-anim [options]="{ path: '/assets/lottie/3-dots-loading.json' }"></ac-generic-anim>
     </div>
   `,
-  styles: [
-  ]
+  styles: []
 })
-export class MainComponent implements OnInit {
 
+export class MainComponent implements OnInit {
   coin: Coin | null = null;
   itsAshitcoin: boolean = false;
   isLoading: boolean | null = null;
-  coinNotFound: boolean | null = false;
+  coinNotFound: boolean | null = null;
 
   constructor(private coingeckoService: CoingeckoService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   searchCoin(searchedCoin: any) {
     this.coingeckoService.getSearch(searchedCoin).pipe(
@@ -67,9 +67,8 @@ export class MainComponent implements OnInit {
 
   resetScan() {
     this.coin = null;
-    this.coinNotFound = false;
+    this.coinNotFound = null;
   }
 
   @Output() showExplanation = new EventEmitter<any>();
-
 }
