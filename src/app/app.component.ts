@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <div [ngClass]="{ dark: isDarkMode }">
       <div class="flex justify-center items-center dark:bg-slate-900 w-screen h-screen relative">
-      <div class="text-xs text-slate-300 dark:text-slate-700 absolute top-0 left-0 mt-5 ml-5">Version 1.0.0</div>
+      <div class="text-xs text-slate-300 dark:text-slate-700 absolute top-0 left-0 mt-5 ml-5">Beta 1.0.0</div>
         <ac-dark-mode-anim
           class="absolute top-0 right-0 w-20"
           (setDarkMode)="setDarkMode()"
@@ -23,7 +23,7 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  isDarkMode: boolean | null = null;
+  isDarkMode: boolean | null = true;
   isExplanation: boolean = false;
 
   constructor() {}

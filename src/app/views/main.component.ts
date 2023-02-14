@@ -7,7 +7,7 @@ import { map, tap } from 'rxjs';
   selector: 'ac-main',
   template: `
     <ac-title (showExplanation)="showExplanation.emit($event)"></ac-title>
-    <div class="h-full">
+    <div>
       <ac-searchbar *ngIf="coin?.id == null && !isLoading" (searchCoin)="searchCoin($event)" [coinNotFound]="coinNotFound" (resetScan)="resetScan()"></ac-searchbar>
     </div>
     <div class="mb-8" *ngIf="coin?.id != null && !isLoading">
