@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ac-error',
@@ -11,20 +12,7 @@ import { NgForm } from '@angular/forms';
           {{ errorMsg }}
         </div>
         <div class="h-4 w-4 text-red-100 cursor-pointer relative float-right bottom-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-            (click)="showError = false; formRef?.resetForm()"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg> 
+          <fa-icon [icon]="faXmark" (click)="showError = false; formRef?.resetForm()"></fa-icon>
         </div>
       </div>
     </div>
@@ -42,6 +30,8 @@ import { NgForm } from '@angular/forms';
 })
 
 export class ErrorComponent implements OnInit {
+  faXmark = faXmark;
+
   showError: boolean = true;
 
   constructor() {}
@@ -50,7 +40,7 @@ export class ErrorComponent implements OnInit {
     setTimeout(() => {
       this.showError = false;
       this.formRef?.resetForm();
-    }, 2500);
+    }, 1500);
   }
 
   @Input() errorMsg: string | null = null;

@@ -17,6 +17,7 @@ import { ExplanationComponent } from './views/explanation.component';
 import { TitleComponent } from './components/title.component';
 import { GenericAnimComponent } from './components/animations/generic-anim.component';
 import { ErrorComponent } from './components/error.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export function playerFactory(): any {
   return import('lottie-web');
@@ -44,6 +45,7 @@ export function playerFactory(): any {
     HttpClientModule,
     FormsModule,
     LottieModule.forRoot({ player: playerFactory }),
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CoingeckoService } from '../providers/api/coingecko.service';
 import { Coin } from '../models/Coin';
 import { map, tap } from 'rxjs';
+import { faRepeat } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ac-main',
@@ -16,6 +17,7 @@ import { map, tap } from 'rxjs';
       <ac-coin-result  [coin]="coin" [itsAshitcoin]="itsAshitcoin"></ac-coin-result>
       <button class="text-white font-bold bg-green-400 hover:bg-green-500 rounded-full w-full mt-4 mb-8 py-2 px-2" (click)="resetScan()">
       Scan another coin
+      <fa-icon class="ml-2" [icon]="faRepeat"></fa-icon>
       </button>
     </div>
     <div *ngIf="isLoading" class="w-28 mx-auto rounded-xl">
@@ -26,6 +28,8 @@ import { map, tap } from 'rxjs';
 })
 
 export class MainComponent implements OnInit {
+  faRepeat = faRepeat;
+
   coin: Coin | null = null;
   itsAshitcoin: boolean = false;
   isLoading: boolean | null = null;

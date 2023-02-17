@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faXmark, faSatelliteDish } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ac-searchbar',
@@ -17,9 +17,9 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
         #f="ngForm"
       >
         <div class="relative w-full">
-          <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+          <fa-icon class="text-gray-400 pointer-events-none absolute top-5 transform -translate-y-1/2 left-4" [icon]="faMagnifyingGlass"></fa-icon>
           <input
-            class="text-center border-2 border-slate-900 w-full rounded-full h-10 mb-4 p-2 px-12"
+            class="text-slate-600 text-center border-2 border-slate-400 dark:border-slate-900 w-full rounded-full h-10 mb-4 p-2 px-12"
             type="text"
             name="searchbar"
             id="searchbar"
@@ -30,22 +30,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
             pattern="^[a-zA-Z0-9 ]*$"
             maxlength="25"
           />
-          <svg
-            *ngIf="f.dirty && searchbarRef.value.length > 0"
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 text-gray-400 cursor-pointer absolute top-5 transform -translate-y-1/2 right-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-            (click)="f.resetForm(); resetScan.emit()"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          <fa-icon *ngIf="f.dirty && searchbarRef.value.length > 0" class="text-gray-400 cursor-pointer absolute top-5 transform -translate-y-1/2 right-4" [icon]="faXmark" (click)="f.resetForm(); resetScan.emit()"></fa-icon>
         </div>
         <button
           class="text-white font-bold bg-green-400 hover:bg-green-500 py-2 px-2 rounded-full w-full disabled:bg-green-400 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -53,6 +38,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
           (click)="searchCoin.emit(searchbarRef.value); f.resetForm()"
         >
           Let's find out!
+          <fa-icon class="ml-2" [icon]="faSatelliteDish"></fa-icon>
         </button>
       </form>
     </div>
@@ -62,8 +48,9 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 })
 
 export class SearchbarComponent implements OnInit {
-
   faMagnifyingGlass = faMagnifyingGlass;
+  faXmark = faXmark;
+  faSatelliteDish = faSatelliteDish;
 
   constructor() {}
 

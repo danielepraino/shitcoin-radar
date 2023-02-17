@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
           class="absolute top-0 right-0 w-20"
           (setDarkMode)="setDarkMode()"
         ></ac-dark-mode-anim>
-        <div class="w-full md:w-1/3 px-6">
+        <div class="w-full md:w-1/4 px-6">
           <ac-main *ngIf="!isExplanation" (showExplanation)="showExplanation($event)"></ac-main>
           <ac-explanation *ngIf="isExplanation" (showExplanation)="showExplanation($event)"></ac-explanation>
           <ac-disclaimer></ac-disclaimer>
