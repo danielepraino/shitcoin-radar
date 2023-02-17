@@ -18,6 +18,7 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "lottie-web": "^5.9.6",
     "ngx-lottie": "^8.2.0",
     "rxjs": "~7.5.0",

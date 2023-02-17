@@ -30,16 +30,16 @@ export class DarkModeAnimComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    localStorage['theme'] === 'dark' ? this.direction = -1 : this.direction = 1;
+    localStorage['theme'] === 'light' ? this.direction = 1 : this.direction = -1;
   }
 
   onAnimate(animationItem: AnimationItem): void {
     this.anim = animationItem;
-    localStorage['theme'] === 'dark' ? this.anim.currentRawFrame = this.startFrame : this.anim.currentRawFrame = this.endFrame;
+    localStorage['theme'] === 'light' ? this.anim.currentRawFrame = this.endFrame : this.anim.currentRawFrame = this.startFrame;
   }
 
   updateAnimation(): void {
-    this.direction == -1 ? this.direction = 1 : this.direction = -1;
+    this.direction == 1 ? this.direction = -1 : this.direction = 1;
     this.anim.play();
     this.anim.setDirection(this.direction);
     this.anim.setSpeed(5);

@@ -19,7 +19,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
         target="_blank"
         >Source: Currency.com</a>
       <button
-        class="text-white text-center font-bold bg-blue-600 hover:bg-blue-700 rounded w-full mt-4 mb-8 py-2 px-2"
+        class="text-white text-center font-bold bg-green-400 hover:bg-green-500 rounded-full w-full mt-4 mb-8 py-2 px-2"
         (click)="showExplanation.emit($event)"
       >
         <svg

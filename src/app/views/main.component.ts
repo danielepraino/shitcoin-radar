@@ -6,13 +6,17 @@ import { map, tap } from 'rxjs';
 @Component({
   selector: 'ac-main',
   template: `
-    <ac-title (showExplanation)="showExplanation.emit($event)"></ac-title>
+    <div>
+      <ac-title (showExplanation)="showExplanation.emit($event)"></ac-title>
+    </div>
     <div>
       <ac-searchbar *ngIf="coin?.id == null && !isLoading" (searchCoin)="searchCoin($event)" [coinNotFound]="coinNotFound" (resetScan)="resetScan()"></ac-searchbar>
     </div>
     <div class="mb-8" *ngIf="coin?.id != null && !isLoading">
       <ac-coin-result  [coin]="coin" [itsAshitcoin]="itsAshitcoin"></ac-coin-result>
-      <button class="text-white font-bold bg-blue-600 hover:bg-blue-700 rounded w-full mt-4 mb-8 py-2 px-2" (click)="resetScan()">Scan another coin 🔍</button>
+      <button class="text-white font-bold bg-green-400 hover:bg-green-500 rounded-full w-full mt-4 mb-8 py-2 px-2" (click)="resetScan()">
+      Scan another coin
+      </button>
     </div>
     <div *ngIf="isLoading" class="w-28 mx-auto rounded-xl">
       <ac-generic-anim [options]="{ path: '/assets/lottie/3-dots-loading.json' }"></ac-generic-anim>
