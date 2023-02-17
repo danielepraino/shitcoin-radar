@@ -19,7 +19,7 @@ import { faMagnifyingGlass, faXmark, faSatelliteDish } from '@fortawesome/free-s
         <div class="relative w-full">
           <fa-icon class="text-gray-400 pointer-events-none absolute top-5 transform -translate-y-1/2 left-4" [icon]="faMagnifyingGlass"></fa-icon>
           <input
-            class="text-slate-600 text-center border-2 border-slate-400 dark:border-slate-900 w-full rounded-full h-10 mb-4 p-2 px-12"
+            class="text-slate-600 text-center border-2 border-slate-400 dark:border-slate-900 bg-slate-100 w-full rounded-full h-10 mb-4 p-2 px-12"
             type="text"
             name="searchbar"
             id="searchbar"
