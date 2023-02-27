@@ -54,9 +54,7 @@ export class SearchbarComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log("coinNotFound", this.coinNotFound);
-  }
+  ngOnInit(): void {}
 
   @Output() searchCoin = new EventEmitter<NgForm>();
   @Output() resetScan = new EventEmitter<any>();

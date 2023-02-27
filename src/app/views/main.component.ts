@@ -41,33 +41,21 @@ export class MainComponent implements OnInit {
 
   searchCoin(searchedCoin: any) {
     this.coingeckoService.getSearch(searchedCoin).pipe(
-      map(res => res.coins.filter((coin: Coin) => coin.name?.toLowerCase() === searchedCoin.toLowerCase() || coin.symbol?.toUpperCase() === searchedCoin.toUpperCase())),
-      //shareReplay(),
-      tap(x => console.log('ciccio',x))
+      map(res => res.coins.filter((coin: Coin) => coin.name?.toLowerCase().trim() === searchedCoin.toLowerCase().trim() || coin.symbol?.toUpperCase().trim() === searchedCoin.toUpperCase().trim())),
     ).subscribe(coin => {
-      console.log("---> coin.length", coin.length);
       coin.length === 0 ? this.coinNotFound = true : this.coinCheck(coin[0].id);
-      console.log("---> this.coinNotFound", this.coinNotFound);
-      console.log("this.isLoading", this.isLoading);
-      console.log("this.coin", this.coin);
     }); 
   }
 
   coinCheck(id: Coin) {
     this.isLoading = true;
-    console.log("this.isLoading", this.isLoading);
-    console.log("COINNNN", id);
     this.coingeckoService.getCoin(id).pipe(
       map(res => res), 
-      tap(x => console.log("this.coingeckoService.getCoin", x))
     ).subscribe(coin => {
-      console.log(" coin.categories",  coin.categories.find((cat: string) => cat === 'Meme'));
-      console.log(" coin.categories tokenized",  coin.categories.filter((cat: string) => cat.includes('Tokenized')));
       coin.coingecko_score < 40 && coin.developer_score < 50 && coin.coingecko_rank > 200 
       && coin.categories.filter((cat: string) => cat.includes('Tokenized')).length === 0
       || coin.categories.find((cat: string) => cat === 'Meme')  
       ? this.itsAshitcoin = true : this.itsAshitcoin = false;
-      console.log("this.itsAshitcoin", this.itsAshitcoin);
       this.coin = coin;
       this.isLoading = false;
     });

@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'ac-coin-alert',
   template: `
-    <div class="text-white text-base md:text-3xl rounded w-full mx-auto mt-4" [ngClass]="{'bg-green-700': !itsAshitcoin, 'bg-red-700': itsAshitcoin}">
+    <div class="text-white text-base rounded w-full mx-auto mt-4" [ngClass]="{'bg-green-700': !itsAshitcoin, 'bg-red-700': itsAshitcoin}">
       <div *ngIf="!itsAshitcoin" class="flex justify-center items-center flex-col">
         <div class="w-24">
         <ac-generic-anim [options]="{ path: '/assets/lottie/checkmark-animation.json', loop: false }"></ac-generic-anim>

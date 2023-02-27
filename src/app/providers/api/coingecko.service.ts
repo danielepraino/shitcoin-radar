@@ -15,7 +15,6 @@ export class CoingeckoService {
   }
 
   getCoin(coin: any): Observable<any> {
-    console.log("COINCHECK");
     return this.http.get<any>(`${environment.apiUrl}/coins/${coin}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`);
   }
 }
