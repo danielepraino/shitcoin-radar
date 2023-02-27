@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
           class="absolute top-0 right-0 w-20"
           (setDarkMode)="setDarkMode()"
         ></ac-dark-mode-anim>
-        <div class="w-full md:w-1/4 px-6">
+        <div class="w-full md:w-2/4 lg:w-1/4 px-6">
           <ac-main *ngIf="!isExplanation" (showExplanation)="showExplanation($event)"></ac-main>
           <ac-explanation *ngIf="isExplanation" (showExplanation)="showExplanation($event)"></ac-explanation>
           <ac-disclaimer></ac-disclaimer>
@@ -35,11 +35,9 @@ export class AppComponent {
   setDarkMode() {
     this.isDarkMode = !this.isDarkMode;
     this.isDarkMode ? window.localStorage.setItem('theme', 'dark') : window.localStorage.setItem('theme', 'light');
-    console.log('this.isDarkMode', this.isDarkMode);
   }
 
   showExplanation(event: any){
     this.isExplanation = !this.isExplanation;
-    console.log("this.isExplanation", this.isExplanation);
   }
 }
